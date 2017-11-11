@@ -11,7 +11,7 @@
         <div class="contentBody">
             <h2>Register</h2>
             <div class="contentForm">
-                <form action="{{url('')}}" method="post">
+                <form action="{{url('/doRegister')}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <b>Email Address<br></b>
                     <input style="width: 100%" type="text" name="txtEmail" placeholder="name@example.com"><br><br>
@@ -22,15 +22,17 @@
                     <b>Fullname<br></b>
                     <input style="width: 100%" type="text" name="txtFullname" placeholder="fullname"><br><br>
                     <b>Date of Birth<br></b>
-                    <input style="width: 100%" type="text" name="txtDoB" placeholder="MM/DD/YYYY"><br><br>
+                    <input style="width: 100%" type="date" name="txtDoB" placeholder="MM/DD/YYYY"><br><br>
                     <b>Profile Picture<br></b>
-                    <form enctype="multipart/form-data" action="{{url('')}}" method="post">
-                        {{csrf_field()}}
-                        <input type="file" name="fileUpload"><br><br>
-                    </form>
+                <input type="file" name="fileUpload"><br><br>
                     <input style="background-color: dodgerblue; color:white" type="submit" value="Sign Up">
                 </form>
             </div>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$erros}}</li>
+                @endforeach
+            </ul>
         </div>
     @include('footer')
 </body>

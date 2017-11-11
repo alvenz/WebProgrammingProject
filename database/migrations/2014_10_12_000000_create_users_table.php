@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->date('dob');
             $table->string('role');
-            $table->string('image_location')->default('');
+            $table->string('picture')->default('');
             $table->rememberToken();
             $table->timestamps();
         });

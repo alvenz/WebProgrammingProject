@@ -20,3 +20,6 @@ Route::get('/insertUser', 'HomeController@viewInsertUserPage');
 Route::get('/updateUser', 'HomeController@viewUpdateUserPage');
 Route::get('/insertGenre', 'HomeController@viewInsertGenrePage');
 Route::get('/updateGenre', 'HomeController@viewUpdateGenrePage');
+
+
+Route::post('/doRegister', 'UserController@doRegister');
