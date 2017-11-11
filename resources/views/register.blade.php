@@ -3,12 +3,15 @@
 <head>
     <title>Register</title>
 </head>
+@if(Auth::check())
+    return redirect('/');
+@else
 <body>
     @include('header')
         <div class="contentBody">
             <h2>Register</h2>
             <div class="contentForm">
-                <form action="{{url('/doRegister')}}" method="post">
+                <form action="{{url('')}}" method="post">
                     {{csrf_field()}}
                     <b>Email Address<br></b>
                     <input style="width: 100%" type="text" name="txtEmail" placeholder="name@example.com"><br><br>
@@ -31,4 +34,5 @@
         </div>
     @include('footer')
 </body>
+@endif
 </html>

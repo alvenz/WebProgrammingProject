@@ -11,7 +11,7 @@
         <div class="contentBody">
             <h2>Login</h2>
             <div class="contentForm">
-                <form action="{{url('/doLogin')}}" method="post">
+                <form action="{{url('')}}" method="post">
                     {{csrf_field()}}
                     <b>Email Address<br></b>
                     <input style="width: 100%" type="text" name="txtEmail" placeholder="name@example.com"><br><br>

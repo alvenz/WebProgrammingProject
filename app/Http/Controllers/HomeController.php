@@ -22,4 +22,34 @@ class HomeController extends Controller
     {
         return view('register');
     }
+
+    public function viewInsertGamePage()
+    {
+        return view('insertGameForm');
+    }
+
+    public function viewUpdateGamePage()
+    {
+        return view('updateGameForm');
+    }
+
+    public function viewInsertUserPage()
+    {
+        return view('insertUserView');
+    }
+
+    public function viewUpdateUserPage()
+    {
+        return view('updateUserView');
+    }
+
+    public function viewInsertGenrePage()
+    {
+        return view('insertGenreForm');
+    }
+
+    public function viewUpdateGenrePage()
+    {
+        return view('updateGenreForm');
+    }
 }

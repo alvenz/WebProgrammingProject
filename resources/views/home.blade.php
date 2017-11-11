@@ -12,7 +12,6 @@
             <h2>Lowest Price Game</h2>
         </div>
     </div>
-
     @include('footer')
     </body>
 </html>
