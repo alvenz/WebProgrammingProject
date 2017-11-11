@@ -93,5 +93,24 @@ body
     padding-top: 5px;
     padding-left: 25px;
     padding-right: 25px;
-    color: #7a1e00;
+    color: #000000;
+}
+
+.contentBody > h2
+{
+    border-bottom: 0.05px solid #bababa;
+}
+
+.contentForm
+{
+    width: 44%;
+    padding-left: 28%;
+    padding-right: 28%;
+}
+
+.contentForm > form > input
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
 }
