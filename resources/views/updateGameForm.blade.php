@@ -6,7 +6,7 @@
         <script>window.location = "/login";</script>
     @else
         @if(Auth::user()->role=='Member')
-            <script>window.location = "/login";</script>
+            <script>window.location = "/";</script>
         @endif
     @endif
 </head>
@@ -25,7 +25,7 @@
             <b>Release Date : <br></b>
             <input style="width: 100%" type="text" name="txtRd" placeholder="MM/DD/YYYY" value="{{$data->release_date}}"><br><br>
             <b>Genre : <br></b>
-            <input style="width: 100%" type="text" name="txtGenre" placeholder="Type here..." value="{{$data->genre}}"><br><br>
+            <input style="width: 100%" type="text" name="txtGenre" placeholder="Type here..." value="{{$data->genreType->genreTypeName}}"><br><br>
             <b>Picture<br></b>
             <input type="file" name="fileUpload"><br><br>
             <input style="background-color: dodgerblue; color:white" type="submit" value="Update Game">

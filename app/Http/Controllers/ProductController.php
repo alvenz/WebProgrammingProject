@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Genre;
 use App\Product;
 
 use Illuminate\Http\Request;
@@ -79,6 +80,46 @@ class ProductController extends Controller
     {
         $products = Product::find($id);
         $products->delete();
+        return redirect('/');
+    }
+
+    public function viewAllGenres()
+    {
+        $genres = Genre::get();
+        return view('manageGenres', ['genres' => $genres] );
+    }
+
+    public function viewUpdateGenreData($id)
+    {
+        $products = Product::find($id);
+        return view('updateGenreForm', ['data'=>$products]);
+    }
+
+    public function doUpdateGenre(Request $req)
+    {
+        //Validation
+
+        $id = $req->txtOldGenreId;
+        $genres = Genre::find($id);
+        $genres->genreTypeName = $req->txtGenreName;
+        $genres->update();
+        return redirect('/');
+    }
+
+    public function doInsertGenre(Request $req)
+    {
+        //Validation
+
+        $genres = new Genre();
+        $genres->genreTypeName = $req->txtGenreName;
+        $genres->save();
+        return redirect('/');
+    }
+
+    public function doDeleteGenre($id)
+    {
+        $genres = Genre::find($id);
+        $genres->delete();
         return redirect('/');
     }
 }

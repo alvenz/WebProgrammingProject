@@ -7,7 +7,7 @@
     <script>window.location = "/login";</script>
 @else
     @if(Auth::user()->role=='Member')
-        <script>window.location = "/login";</script>
+        <script>window.location = "/";</script>
     @endif
 @endif
 <body>

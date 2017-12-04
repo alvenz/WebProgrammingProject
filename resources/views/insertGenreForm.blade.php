@@ -6,7 +6,7 @@
         <script>window.location = "/login";</script>
     @else
         @if(Auth::user()->role=='Member')
-            <script>window.location = "/login";</script>
+            <script>window.location = "/";</script>
         @endif
     @endif
 </head>
@@ -15,7 +15,7 @@
 <div class="contentBody">
     <h2>Insert Genre</h2>
     <div class="contentForm">
-        <form action="{{url('')}}" method="post">
+        <form action="{{url('/doInsertGenre')}}" method="post">
             {{csrf_field()}}
             <b>Genre Name : <br></b>
             <input style="width: 100%" type="text" name="txtGenreName" placeholder="Type here..."><br><br>

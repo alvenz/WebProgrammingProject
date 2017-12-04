@@ -7,7 +7,7 @@
     <script>window.location = "/login";</script>
 @else
     @if(Auth::user()->role=='Member')
-        <script>window.location = "/login";</script>
+        <script>window.location = "/";</script>
     @endif
 @endif
 <body>
@@ -30,7 +30,7 @@
             <tr>
                 <td>{{$i + 1}}</td>
                 <td>{{ $products[$i]->name }}</td>
-                <td>{{ $products[$i]->genre }}</td>
+                <td>{{ $products[$i]->genreType->genreTypeName }}</td>
                 <td>{{ $products[$i]->price }}</td>
                 <td>{{ $products[$i]->release_date }}</td>
                 <td>{{ $products[$i]->picture }}</td>
