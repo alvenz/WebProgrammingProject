@@ -4,7 +4,7 @@
     <title>Register</title>
 </head>
 @if(Auth::check())
-    return redirect('/');
+    <script>window.location = "/";</script>
 @else
 <body>
     @include('header')
@@ -24,13 +24,13 @@
                     <b>Date of Birth<br></b>
                     <input style="width: 100%" type="date" name="txtDoB" placeholder="MM/DD/YYYY"><br><br>
                     <b>Profile Picture<br></b>
-                <input type="file" name="fileUpload"><br><br>
+                    <input type="file" name="fileUpload"><br><br>
                     <input style="background-color: dodgerblue; color:white" type="submit" value="Sign Up">
                 </form>
             </div>
             <ul>
                 @foreach($errors->all() as $error)
-                    <li>{{$erros}}</li>
+                    <li>{{$error}}</li>
                 @endforeach
             </ul>
         </div>

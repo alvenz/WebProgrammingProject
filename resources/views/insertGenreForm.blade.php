@@ -2,6 +2,13 @@
 <html>
 <head>
     <title>Insert Genre</title>
+    @if(!Auth::check())
+        <script>window.location = "/login";</script>
+    @else
+        @if(Auth::user()->role=='Member')
+            <script>window.location = "/login";</script>
+        @endif
+    @endif
 </head>
 <body>
 @include('header')

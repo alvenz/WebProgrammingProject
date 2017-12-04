@@ -14,7 +14,7 @@ body
 
 .navHeadLeft
 {
-    width: 45%;
+    width: 75%;
     float: left;
 }
 
@@ -38,7 +38,7 @@ body
 
 .navHeadRight
 {
-    width: 55%;
+    width: 25%;
     float: right;
 }
 

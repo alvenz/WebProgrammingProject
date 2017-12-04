@@ -8,10 +8,31 @@ use App\Http\Requests;
 
 class HomeController extends Controller
 {
-    public function viewHomePage()
+    /*
+     public function viewHomePage()
     {
         return view('home');
     }
+    public function viewUpdateGamePage()
+    {
+        return view('updateGameForm');
+    }
+
+    public function viewUpdateUserPage()
+    {
+        return view('updateUserView');
+    }
+
+    public function viewStorePage()
+    {
+        return view('store');
+    }
+
+     public function viewUpdateGenrePage()
+    {
+        return view('updateGenreForm');
+    }
+    */
 
     public function viewLoginPage()
     {
@@ -28,19 +49,9 @@ class HomeController extends Controller
         return view('insertGameForm');
     }
 
-    public function viewUpdateGamePage()
-    {
-        return view('updateGameForm');
-    }
-
     public function viewInsertUserPage()
     {
         return view('insertUserView');
-    }
-
-    public function viewUpdateUserPage()
-    {
-        return view('updateUserView');
     }
 
     public function viewInsertGenrePage()
@@ -48,8 +59,13 @@ class HomeController extends Controller
         return view('insertGenreForm');
     }
 
-    public function viewUpdateGenrePage()
+    public function viewProfilePage()
     {
-        return view('updateGenreForm');
+        return view('profile');
+    }
+
+    public function viewMyGames()
+    {
+        return view('mygames');
     }
 }

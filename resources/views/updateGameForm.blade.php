@@ -2,28 +2,32 @@
 <html>
 <head>
     <title>Update Game</title>
+    @if(!Auth::check())
+        <script>window.location = "/login";</script>
+    @else
+        @if(Auth::user()->role=='Member')
+            <script>window.location = "/login";</script>
+        @endif
+    @endif
 </head>
 <body>
 @include('header')
 <div class="contentBody">
     <h2>Update Game</h2>
     <div class="contentForm">
-        <form action="{{url('')}}" method="post">
+        <form action="{{url('/doUpdateGame')}}" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
-            <input type="hidden" name="txtOldGameId" value="">
+            <input type="hidden" name="txtOldGameId" value="{{$data->id}}">
             <b>Game Name : <br></b>
-            <input style="width: 100%" type="text" name="txtGameName" placeholder="Type here..." value=""><br><br>
+            <input style="width: 100%" type="text" name="txtGameName" placeholder="Type here..." value="{{$data->name}}"><br><br>
             <b>Price : <br></b>
-            <input style="width: 100%" type="text" name="txtPrice" placeholder="Type here..." value=""><br><br>
+            <input style="width: 100%" type="text" name="txtPrice" placeholder="Type here..." value="{{$data->price}}"><br><br>
             <b>Release Date : <br></b>
-            <input style="width: 100%" type="text" name="txtDoB" placeholder="MM/DD/YYYY" value=""><br><br>
+            <input style="width: 100%" type="text" name="txtRd" placeholder="MM/DD/YYYY" value="{{$data->release_date}}"><br><br>
             <b>Genre : <br></b>
-
+            <input style="width: 100%" type="text" name="txtGenre" placeholder="Type here..." value="{{$data->genre}}"><br><br>
             <b>Picture<br></b>
-            <form enctype="multipart/form-data" action="{{url('')}}" method="post">
-                {{csrf_field()}}
-                <input type="file" name="fileUpload"><br><br>
-            </form>
+            <input type="file" name="fileUpload"><br><br>
             <input style="background-color: dodgerblue; color:white" type="submit" value="Update Game">
         </form>
     </div>

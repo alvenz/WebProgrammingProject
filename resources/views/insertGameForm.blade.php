@@ -2,27 +2,31 @@
 <html>
 <head>
     <title>Insert Game</title>
+    @if(!Auth::check())
+        <script>window.location = "/login";</script>
+    @else
+        @if(Auth::user()->role=='Member')
+            <script>window.location = "/login";</script>
+        @endif
+    @endif
 </head>
 <body>
 @include('header')
 <div class="contentBody">
     <h2>Insert Game</h2>
     <div class="contentForm">
-        <form action="{{url('')}}" method="post">
+        <form action="{{url('/doInsertGame')}}" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
             <b>Game Name : <br></b>
             <input style="width: 100%" type="text" name="txtGameName" placeholder="Type here..."><br><br>
             <b>Price : <br></b>
             <input style="width: 100%" type="text" name="txtPrice" placeholder="Type here..."><br><br>
             <b>Release Date : <br></b>
-            <input style="width: 100%" type="text" name="txtDoB" placeholder="MM/DD/YYYY"><br><br>
+            <input style="width: 100%" type="date" name="txtRd" placeholder="MM/DD/YYYY"><br><br>
             <b>Genre : <br></b>
-
+            <input style="width: 100%" type="text" name="txtGenre" placeholder="Type here..."><br><br>
             <b>Picture<br></b>
-            <form enctype="multipart/form-data" action="{{url('')}}" method="post">
-                {{csrf_field()}}
-                <input type="file" name="fileUpload"><br><br>
-            </form>
+            <input type="file" name="fileUpload"><br><br>
             <input style="background-color: dodgerblue; color:white" type="submit" value="Insert Game">
         </form>
     </div>
