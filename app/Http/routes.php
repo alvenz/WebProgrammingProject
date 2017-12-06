@@ -22,11 +22,14 @@ Route::get('/updateUser/{id}', 'UserController@viewUpdateUserData');
 Route::get('/insertGenre', 'HomeController@viewInsertGenrePage');
 Route::get('/updateGenre/{id}', 'ProductController@viewUpdateGenreData');
 
-Route::get('/store', 'ProductController@viewProduct');
+Route::get('/store/{genre}', 'ProductController@viewProduct');
 Route::get('/profile', 'HomeController@viewProfilePage');
 Route::post('/doEditProfile', 'UserController@doEditProfile');
-Route::get('/myGames', 'HomeController@viewMyGames');
+Route::get('/myGames/{id}', 'ProductController@viewMyGames');
+Route::get('/myCart/{id}', 'ProductController@viewMyCart');
+Route::get('/doDeleteCart/{id}', 'TransactionController@doDeleteCart');
 
+Route::get('/store/gamesDetail/{id}', 'ProductController@showGameDetail');
 
 Route::get('/', 'ProductController@viewLowestPriceGame');
 Route::get('/manageGame', 'ProductController@viewAllGames');
@@ -44,6 +47,9 @@ Route::get('/doDeleteGame/{id}', 'ProductController@doDeleteGame');
 Route::post('/doUpdateGenre', 'ProductController@doUpdateGenre');
 Route::post('/doInsertGenre', 'ProductController@doInsertGenre');
 Route::get('/doDeleteGenre/{id}', 'ProductController@doDeleteGenre');
+
+Route::get('/viewTransactions', 'TransactionController@viewUserTransaction');
+Route::get('/doDeleteTransaction/{id}', 'TransactionController@doDeleteTransaction');
 
 Route::post('/doRegister', 'UserController@doRegister');
 Route::post('/doLogin', 'UserController@doLogin');

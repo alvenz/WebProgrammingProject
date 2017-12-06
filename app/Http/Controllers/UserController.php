@@ -6,7 +6,9 @@ use App\User;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -50,6 +52,7 @@ class UserController extends Controller
 
     public function doLogin(Request $req)
     {
+        //Validation kurang appropriate with the data in the database
         $rules = [
             'txtEmail' => 'required',
             'txtPassword' => 'required'
@@ -59,7 +62,17 @@ class UserController extends Controller
 
         if(Auth::attempt(['email'=>$req->txtEmail, 'password'=>$req->txtPassword]))
         {
-            return redirect('/');
+            if($req->has('rememberMe'))
+            {
+                $response = new Response(redirect('/'));
+                $response->withCookie('rememberMeCookiesEmail', $req->txtEmail, 30);
+                $response->withCookie('rememberMeCookiesPassword', $req->txtPassword, 30);
+                return $response;
+            }
+            else
+            {
+                return redirect('/');
+            }
         }
         else
         {
@@ -129,6 +142,8 @@ class UserController extends Controller
 
     public function doEditProfile(Request $req)
     {
+        //Validation
+
         $users = User::find(Auth::user()->id);
         $users->name = $req->txtFullname;
         $users->dob = $req->txtDoB;

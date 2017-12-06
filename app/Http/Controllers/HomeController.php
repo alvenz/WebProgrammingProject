@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TransactionHistory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -28,9 +29,14 @@ class HomeController extends Controller
         return view('store');
     }
 
-     public function viewUpdateGenrePage()
+    public function viewUpdateGenrePage()
     {
         return view('updateGenreForm');
+    }
+
+    public function viewMyGames()
+    {
+        return view('mygames');
     }
     */
 
@@ -62,10 +68,5 @@ class HomeController extends Controller
     public function viewProfilePage()
     {
         return view('profile');
-    }
-
-    public function viewMyGames()
-    {
-        return view('mygames');
     }
 }

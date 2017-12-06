@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\CartDetail;
+use App\GamesLibrary;
+use App\GamesLibraryDetail;
 use App\Genre;
 use App\Product;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
@@ -18,7 +23,7 @@ class ProductController extends Controller
         return view('home', ['products' => $products]);
     }
 
-    public function viewProduct(Request $req)
+    public function viewProduct(Request $req, $genre)
     {
         $search = "";
         if(isset($req->doSearching))
@@ -26,8 +31,40 @@ class ProductController extends Controller
             $search = $req->doSearching;
         }
 
-        $products = Product::Where('name', 'like', '%'.$search.'%')->paginate(6);
-        return view('store', ['products' => $products, 'search'=>$search]);
+        if($genre == 'default')
+        {
+            $arrayQuery = [['name', 'like', '%'.$search.'%']];
+        }
+        else
+        {
+            $genreType = $genre;
+            $arrayQuery = [['name', 'like', '%'.$search.'%'],['genreTypeId', '=', $genreType]];
+        }
+        $genres = Genre::get();
+
+        $products = Product::Where($arrayQuery)->paginate(6);
+        return view('store', ['products' => $products, 'search'=>$search, 'genres'=>$genres]);
+    }
+
+    public function viewMyGames($id)
+    {
+        $query = DB::table('games_libraries')->select('gamesLibraryId')->where('userId', '=', $id)->get();
+        $array = json_decode(json_encode($query), True);
+        $index = $array[0];
+        $gameslibraryid = $index['gamesLibraryId'];
+        $mygames = GamesLibraryDetail::Where('gamesLibraryId', '=', $gameslibraryid)->paginate(6);
+
+        return view('mygames', ['mygames' => $mygames]);
+    }
+
+    public function viewMyCart($id)
+    {
+        $query = DB::table('carts')->select('cartId')->where('userId', '=', $id)->get();
+        $array = json_decode(json_encode($query), True);
+        $index = $array[0];
+        $cartId = $index['cartId'];
+        $carts = CartDetail::Where('cartId', '=', $cartId)->get();
+        return view('cart', ['carts' => $carts]);
     }
 
     public function viewAllGames()
@@ -121,5 +158,11 @@ class ProductController extends Controller
         $genres = Genre::find($id);
         $genres->delete();
         return redirect('/');
+    }
+
+    public function showGameDetail($id)
+    {
+        $games = Product::Where('id', '=', $id)->get();
+        return view('gameDetail', ['games' => $games]);
     }
 }

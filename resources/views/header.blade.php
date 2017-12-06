@@ -16,10 +16,10 @@
                         <a href="{{url('/')}}"> Home </a>
                     </li>
                     <li>
-                        <a href="{{url('/store')}}"> Store </a>
+                        <a href="{{url('/store/default')}}"> Store </a>
                     </li>
                     <li>
-                        <a href="{{url('/myGames')}}"> My Games </a>
+                        <a href="{{url('/myGames/'.\Illuminate\Support\Facades\Auth::user()->id)}}"> My Games </a>
                     </li>
             </div>
             <div class="navHeadRight">
@@ -30,7 +30,7 @@
                     <a href="{{url('/profile')}}"> Profile </a>
                 </li>
                 <li>
-                    <a href="{{url('/')}}"> Cart </a>
+                    <a href="{{url('/myCart/'.\Illuminate\Support\Facades\Auth::user()->id)}}"> Cart </a>
                 </li>
                 Hi, {{Auth::user()->name}}
             </div>
@@ -60,7 +60,7 @@
                             <a href="{{url('/profile')}}"> Profile </a>
                         </li>
                         <li>
-                            <a href="{{url('/')}}"> View Transaction </a>
+                            <a href="{{url('/viewTransactions')}}"> View Transaction </a>
                         </li>
                         Hi, {{Auth::user()->role}}
                     </div>
@@ -74,7 +74,7 @@
                     <a href="{{url('/')}}"> Home </a>
                 </li>
                 <li>
-                    <a href="{{url('/store')}}"> Store </a>
+                    <a href="{{url('/store/default')}}"> Store </a>
                 </li>
             </div>
             <div class="navHeadRight">

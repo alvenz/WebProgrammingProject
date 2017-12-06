@@ -12,4 +12,13 @@ class Product extends Model
     {
         return $this->belongsTo('App\Genre', 'genreTypeId');
     }
+    public function listGames()
+    {
+        return $this->hasMany('App\GamesLibraryDetail', 'productId');
+    }
+
+    public function listCarts()
+    {
+        return $this->hasMany('App\CartDetail', 'productId');
+    }
 }
