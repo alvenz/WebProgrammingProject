@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Genre;
 use App\TransactionHistory;
 use Illuminate\Http\Request;
 
@@ -52,7 +53,8 @@ class HomeController extends Controller
 
     public function viewInsertGamePage()
     {
-        return view('insertGameForm');
+        $genres = Genre::get();
+        return view('insertGameForm', ['genres'=>$genres]);
     }
 
     public function viewInsertUserPage()

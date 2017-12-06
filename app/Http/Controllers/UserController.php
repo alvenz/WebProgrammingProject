@@ -17,38 +17,37 @@ class UserController extends Controller
 {
     public function doRegister(Request $req)
     {
-        /*$rules = [
-            'txtEmail' => 'required | email | unique:users',
+        $dt = new Carbon();
+        $before=$dt->subYears(12)->format('m/d/Y');
+        $rules = [
+            'email' => 'required | email | unique:users',
             'txtPassword' => 'required | min:5 | alpha_num',
-            'txtConfPassword' => 'required',
-            'txtDoB' => 'required',
-            'txtFullname => 'required | min:5'
+            'txtConfPassword'=>'required|same:txtPassword',
+            'txtDoB'=>'before:'.$before,
+            'fileUpload'=>'required|image',
+            'txtFullname' => 'required | min:5'
         ];
 
-        $messages = [
-            'required' => 'The :attribute mustn\'t be empty',
-        ];
-        */
+        $errors = Validator::make($req->all(), $rules);
 
-        //$errors = Validator::make($req->all(), $rules, $messages);
-
-        //if($errors->fails()){
-            //return redirect('/')->withErrors($errors);
-        //}else
-        //{
-        $user = new User();
-        $user->name = $req->txtFullname;
-        $user->email = $req->txtEmail;
-        $user->password = Hash::make($req->txtPassword);
-        $user->dob = $req->txtDoB;
-        $image = $req['fileUpload'];
-        $fileName = $image->getClientOriginalName();
-        $image->move('uploads', $fileName);
-        $user->picture = $fileName;
-        $user->role = 'Member';
-        $user->save();
-        return redirect('/');
-        //}
+        if($errors->fails())
+        {
+            return redirect('/register')->withErrors($errors);
+        }else
+        {
+            $user = new User();
+            $user->name = $req->txtFullname;
+            $user->email = $req->email;
+            $user->password = Hash::make($req->txtPassword);
+            $user->dob = $req->txtDoB;
+            $image = $req['fileUpload'];
+            $fileName = $image->getClientOriginalName();
+            $image->move('uploads', $fileName);
+            $user->picture = $fileName;
+            $user->role = 'Member';
+            $user->save();
+            return redirect('/');
+        }
     }
 
     public function doLogin(Request $req)
@@ -102,11 +101,11 @@ class UserController extends Controller
     public function doUpdateUser(Request $req)
     {
         //Validation
-        $dt = new Carbon\Carbon();
+        $dt = new Carbon();
         $before=$dt->subYears(12)->format('m/d/Y');
         $this->validate($req,[
             'txtFullname'=>'required|min:5',
-            'txtEmail'=>'required|email|unique:users',
+            'email'=>'required|email',
             'txtPassword'=>'required|alpha_num|min:5',
             'txtConfPassword'=>'required|same:txtPassword',
             'txtDoB'=>'before:'.$before,
@@ -115,7 +114,18 @@ class UserController extends Controller
         $id = $req->txtOldUserId;
         $users = User::find($id);
         $users->name = $req->txtFullname;
-        $users->email = $req->txtEmail;
+        if($users->email != $req->email)
+        {
+            $checkEmail = User::where('email', '=', $req->email)->get()->count();
+            if($checkEmail != 0)
+            {
+                return back()->with('checkEmail', [$checkEmail]);
+            }
+            else
+            {
+                $users->email = $req->email;
+            }
+        }
         $users->password = Hash::make($req->txtConfPassword);
         $users->dob = $req->txtDoB;
         $image = $req['fileUpload'];
@@ -128,11 +138,11 @@ class UserController extends Controller
     public function doInsertUser(Request $req)
     {
         //Validation
-        $dt = new Carbon\Carbon();
+        $dt = new Carbon();
         $before=$dt->subYears(12)->format('m/d/Y');
         $this->validate($req,[
             'txtFullname'=>'required|min:5',
-            'txtEmail'=>'required|email|unique:users',
+            'email'=>'required|email|unique:users',
             'txtPassword'=>'required|alpha_num|min:5',
             'txtConfPassword'=>'required|same:txtPassword',
             'txtDoB'=>'before:'.$before,
@@ -140,7 +150,7 @@ class UserController extends Controller
         ]);
         $users = new User();
         $users->name = $req->txtFullname;
-        $users->email = $req->txtEmail;
+        $users->email = $req->email;
         $users->password = Hash::make($req->txtConfPassword);
         $users->dob = $req->txtDoB;
         $image = $req['fileUpload'];
@@ -162,7 +172,7 @@ class UserController extends Controller
     public function doEditProfile(Request $req)
     {
         //Validation
-        $dt = new Carbon\Carbon();
+        $dt = new Carbon();
         $before=$dt->subYears(12)->format('m/d/Y');
         $this->validate($req,[
             'txtFullname'=>'required|min:5',

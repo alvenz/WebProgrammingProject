@@ -18,7 +18,7 @@
         </div>
         Your Order Details<br>
         <tr>
-            {{$totalQty = 0, $totalPrice = 0}}
+            {{$totalQty = 0, $totalPrice = 0, $sessionCartId = 0}}
             @for($i=0; $i<count($carts); $i++)
                 <div class="contentLeftBody">
                     <tr>
@@ -29,18 +29,21 @@
                         <td><a href="{{url('/doDeleteCart/'.$carts[$i]->id)}}"><input type="button" value="Delete From Cart"></a></td><br>
                     </tr>
                 </div>
-                {{$totalPrice = $carts[$i]->carts->price * $carts[$i]->qty}}
-                {{$totalQty++}}
+                {{$totalPrice += $carts[$i]->carts->price * $carts[$i]->qty}}
+                {{$totalQty+=$carts[$i]->qty}}
+                {{$sessionCartId = $carts[$i]->cartId}}
             @endfor
-                <div class="contentMiddleBody">
-                    <form action="{{url('/doCheckout')}}" method="post">
-                        {{$totalQty}} Item in Your cart Rp. {{$totalPrice}} <br><br><br><br>
-                        Total Rp. {{$totalPrice}}<br>
-                        <input type="hidden" name="txtPrice" value="{{$totalPrice}}">
-                        <input type="submit" value="Check Out">
-                    </form>
-                </div>
         </tr>
+        <div class="contentMiddleBody">
+            <form action="{{url('/doCheckOut/'.$sessionCartId)}}" method="post">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                {{$totalQty}} Item in Your cart Rp. {{$totalPrice}} <br><br><br><br>
+                Total Rp. {{$totalPrice}}<br>
+                <input type="hidden" name="txtPrice" value="{{$totalPrice}}">
+                <input type="submit" value="Check Out">
+            </form>
+        </div>
+
     </div>
     @include('footer')
 </body>

@@ -24,7 +24,11 @@
             <b>Release Date : <br></b>
             <input style="width: 100%" type="date" name="txtRd" placeholder="MM/DD/YYYY"><br><br>
             <b>Genre : <br></b>
-            <input style="width: 100%" type="text" name="txtGenre" placeholder="Type here..."><br><br>
+            <select style="width:100%" name="txtGenre">
+                @for($i = 0; $i < count($genres); $i++)
+                    <option value="{{$genres[$i]->id}}">{{$genres[$i]->genreTypeName}}</option>
+                @endfor
+            </select>
             <b>Picture<br></b>
             <input type="file" name="fileUpload"><br><br>
             <input style="background-color: dodgerblue; color:white" type="submit" value="Insert Game">

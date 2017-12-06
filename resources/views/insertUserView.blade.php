@@ -20,7 +20,7 @@
                 <b>Name<br></b>
                 <input style="width: 100%" type="text" name="txtFullname" placeholder="Type here..."><br><br>
                 <b>Email Address<br></b>
-                <input style="width: 100%" type="text" name="txtEmail" placeholder="name@example.com"><br><br>
+                <input style="width: 100%" type="text" name="email" placeholder="name@example.com"><br><br>
                 <b>Password<br></b>
                 <input style="width: 100%" type="password" name="txtPassword" placeholder="password"><br><br>
                 <b>Password Confirmation<br></b>

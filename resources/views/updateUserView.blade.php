@@ -21,7 +21,7 @@
             <b>Name<br></b>
             <input style="width: 100%" type="text" name="txtFullname" placeholder="Type here..." value="{{$data->name}}"><br><br>
             <b>Email Address<br></b>
-            <input style="width: 100%" type="text" name="txtEmail" placeholder="name@example.com" value="{{$data->email}}"><br><br>
+            <input style="width: 100%" type="text" name="email" placeholder="name@example.com" value="{{$data->email}}"><br><br>
             <b>Password<br></b>
             <input style="width: 100%" type="password" name="txtPassword" placeholder="password"><br><br>
             <b>Password Confirmation<br></b>
@@ -34,6 +34,9 @@
         </form>
     </div>
     <ul>
+        @if(session()->has('checkEmail'))
+            Email is Already Taken
+        @endif
         @foreach($errors->all() as $error)
             <li>{{$error}}</li>
         @endforeach

@@ -28,11 +28,11 @@
                     <input style="background-color: dodgerblue; color:white" type="submit" value="Sign Up">
                 </form>
             </div>
-                        <ul>
-                            @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
-                        </ul>
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
         </div>
     @include('footer')
 </body>

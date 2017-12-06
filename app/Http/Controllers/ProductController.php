@@ -23,14 +23,13 @@ class ProductController extends Controller
         return view('home', ['products' => $products]);
     }
 
-    public function viewProduct(Request $req, $genre)
+    public function viewProduct(Request $req, $genre='default')
     {
         $search = "";
         if(isset($req->doSearching))
         {
             $search = $req->doSearching;
         }
-
         if($genre == 'default')
         {
             $arrayQuery = [['name', 'like', '%'.$search.'%']];
@@ -57,16 +56,6 @@ class ProductController extends Controller
         return view('mygames', ['mygames' => $mygames]);
     }
 
-    public function viewMyCart($id)
-    {
-        $query = DB::table('carts')->select('cartId')->where('userId', '=', $id)->get();
-        $array = json_decode(json_encode($query), True);
-        $index = $array[0];
-        $cartId = $index['cartId'];
-        $carts = CartDetail::Where('cartId', '=', $cartId)->get();
-        return view('cart', ['carts' => $carts]);
-    }
-
     public function viewAllGames()
     {
         $products = Product::get();
@@ -76,7 +65,8 @@ class ProductController extends Controller
     public function viewUpdateData($id)
     {
         $products = Product::find($id);
-        return view('updateGameForm', ['data'=>$products]);
+        $genres = Genre::get();
+        return view('updateGameForm', ['data'=>$products, 'genres'=>$genres]);
     }
 
     public function doUpdateGame(Request $req)
@@ -138,10 +128,10 @@ class ProductController extends Controller
         return view('manageGenres', ['genres' => $genres] );
     }
 
-    public function viewUpdateGenreData($id)
+    public function viewUpdateGenreData($idx)
     {
-        $products = Product::find($id);
-        return view('updateGenreForm', ['data'=>$products]);
+        $genres = Genre::Where('id', '=', $idx)->get();
+        return view('updateGenreForm', ['genres' => $genres]);
     }
 
     public function doUpdateGenre(Request $req)
@@ -161,7 +151,7 @@ class ProductController extends Controller
     {
         //Validation
         $this->validate($req,[
-           'txtGenreName'=>'min:3'
+            'txtGenreName'=>'min:3'
         ]);
         $genres = new Genre();
         $genres->genreTypeName = $req->txtGenreName;

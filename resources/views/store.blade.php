@@ -17,10 +17,9 @@
             </form>
             Genres
             @foreach($genres->all() as $genre)
-                <li><a href="/store/{{$genre->id}}">{{$genre->genreTypeName}}</a></li>
+                <li><a href="{{url('/store/'.$genre->id.'$doSearching='.$search)}}">{{$genre->genreTypeName}}</a></li>
             @endforeach
         </div>
-
         <div class="contentMiddleBody">
             @for($i=0; $i<count($products); $i++)
                 <tr>
@@ -30,7 +29,7 @@
                     @if(Auth::check())
                         @if(Auth::user()->role == 'Member')
                             <a href="{{url('store/gamesDetail/'.$products[$i]->id)}}">Show Game Detail</a>
-                            <a href="{{url('/')}}"><input type="button" value="Add to Cart"></a><br>
+                            <a href="{{url('/addToCart/'.$products[$i]->id)}}"><input type="button" value="Add to Cart"></a><br>
                         @endif
                     @else
                         <br>
@@ -41,7 +40,6 @@
                 <a href="{{url($products->url($i+1).'&doSearching='.$search)}}">{{ $i+1 }}</a>
             @endfor
         </div>
-
     </div>
     @include('footer')
 </body>

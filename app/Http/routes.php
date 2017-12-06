@@ -22,12 +22,15 @@ Route::get('/updateUser/{id}', 'UserController@viewUpdateUserData');
 Route::get('/insertGenre', 'HomeController@viewInsertGenrePage');
 Route::get('/updateGenre/{id}', 'ProductController@viewUpdateGenreData');
 
-Route::get('/store/{genre}', 'ProductController@viewProduct');
+Route::get('/store/{genre?}', 'ProductController@viewProduct');
 Route::get('/profile', 'HomeController@viewProfilePage');
 Route::post('/doEditProfile', 'UserController@doEditProfile');
 Route::get('/myGames/{id}', 'ProductController@viewMyGames');
-Route::get('/myCart/{id}', 'ProductController@viewMyCart');
+Route::get('/myCart/{id}', 'TransactionController@viewMyCart');
 Route::get('/doDeleteCart/{id}', 'TransactionController@doDeleteCart');
+
+Route::get('/addToCart/{id}', 'TransactionController@doAddToCart');
+Route::post('/doCheckOut/{id}', 'TransactionController@doCheckOut');
 
 Route::get('/store/gamesDetail/{id}', 'ProductController@showGameDetail');
 
