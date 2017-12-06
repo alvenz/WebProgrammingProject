@@ -82,7 +82,13 @@ class ProductController extends Controller
     public function doUpdateGame(Request $req)
     {
         //Validation
-
+        $this->validate($req,[
+            'txtGameName'=>'min:3',
+            'txtGenre'=>'required',
+            'txtRd'=>'required|date',
+            'txtPrice'=>'required|numeric|min:1',
+            'fileUpload'=>'required|image'
+        ]);
         $id = $req->txtOldGameId;
         $products = Product::find($id);
         $products->name = $req->txtGameName;
@@ -99,7 +105,13 @@ class ProductController extends Controller
     public function doInsertGame(Request $req)
     {
         //Validation
-
+        $this->validate($req,[
+            'txtGameName'=>'min:3',
+            'txtGenre'=>'required',
+            'txtRd'=>'required|date',
+            'txtPrice'=>'required|numeric|min:1',
+            'fileUpload'=>'required|image'
+        ]);
         $products = new Product();
         $products->name = $req->txtGameName;
         $products->price = $req->txtPrice;
@@ -135,7 +147,9 @@ class ProductController extends Controller
     public function doUpdateGenre(Request $req)
     {
         //Validation
-
+        $this->validate($req,[
+            'txtGenreName'=>'min:3'
+        ]);
         $id = $req->txtOldGenreId;
         $genres = Genre::find($id);
         $genres->genreTypeName = $req->txtGenreName;
@@ -146,7 +160,9 @@ class ProductController extends Controller
     public function doInsertGenre(Request $req)
     {
         //Validation
-
+        $this->validate($req,[
+           'txtGenreName'=>'min:3'
+        ]);
         $genres = new Genre();
         $genres->genreTypeName = $req->txtGenreName;
         $genres->save();

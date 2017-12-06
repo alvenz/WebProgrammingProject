@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 
 use App\Http\Requests;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -101,7 +102,16 @@ class UserController extends Controller
     public function doUpdateUser(Request $req)
     {
         //Validation
-
+        $dt = new Carbon\Carbon();
+        $before=$dt->subYears(12)->format('m/d/Y');
+        $this->validate($req,[
+            'txtFullname'=>'required|min:5',
+            'txtEmail'=>'required|email|unique:users',
+            'txtPassword'=>'required|alpha_num|min:5',
+            'txtConfPassword'=>'required|same:txtPassword',
+            'txtDoB'=>'before:'.$before,
+            'fileUpload'=>'required|image'
+        ]);
         $id = $req->txtOldUserId;
         $users = User::find($id);
         $users->name = $req->txtFullname;
@@ -118,7 +128,16 @@ class UserController extends Controller
     public function doInsertUser(Request $req)
     {
         //Validation
-
+        $dt = new Carbon\Carbon();
+        $before=$dt->subYears(12)->format('m/d/Y');
+        $this->validate($req,[
+            'txtFullname'=>'required|min:5',
+            'txtEmail'=>'required|email|unique:users',
+            'txtPassword'=>'required|alpha_num|min:5',
+            'txtConfPassword'=>'required|same:txtPassword',
+            'txtDoB'=>'before:'.$before,
+            'fileUpload'=>'required|image'
+        ]);
         $users = new User();
         $users->name = $req->txtFullname;
         $users->email = $req->txtEmail;
@@ -143,7 +162,13 @@ class UserController extends Controller
     public function doEditProfile(Request $req)
     {
         //Validation
-
+        $dt = new Carbon\Carbon();
+        $before=$dt->subYears(12)->format('m/d/Y');
+        $this->validate($req,[
+            'txtFullname'=>'required|min:5',
+            'txtDoB'=>'before:'.$before,
+            'fileUpload'=>'required|image'
+        ]);
         $users = User::find(Auth::user()->id);
         $users->name = $req->txtFullname;
         $users->dob = $req->txtDoB;

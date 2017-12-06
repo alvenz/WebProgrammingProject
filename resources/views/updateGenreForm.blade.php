@@ -23,6 +23,11 @@
             <input style="background-color: dodgerblue; color:white" type="submit" value="Update Genre">
         </form>
     </div>
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    </ul>
 </div>
 @include('footer')
 </body>
