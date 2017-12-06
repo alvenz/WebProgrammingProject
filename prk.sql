@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2017 at 01:14 AM
+-- Generation Time: Dec 07, 2017 at 12:20 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -58,13 +58,6 @@ CREATE TABLE `cart_details` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `cart_details`
---
-
-INSERT INTO `cart_details` (`id`, `cartId`, `productId`, `qty`, `purchaseDate`, `created_at`, `updated_at`) VALUES
-(1, 1, 4, 3, '2017-12-05', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -223,7 +216,10 @@ CREATE TABLE `transaction_histories` (
 --
 
 INSERT INTO `transaction_histories` (`id`, `userId`, `transactionDate`, `created_at`, `updated_at`) VALUES
-(1, 1, '2017-12-06', NULL, NULL);
+(1, 1, '2017-12-06', NULL, NULL),
+(2, 1, '2017-12-06', '2017-12-06 15:24:20', '2017-12-06 15:24:20'),
+(3, 1, '2017-12-06', '2017-12-06 15:34:24', '2017-12-06 15:34:24'),
+(4, 1, '2017-12-06', '2017-12-06 15:35:32', '2017-12-06 15:35:32');
 
 -- --------------------------------------------------------
 
@@ -249,8 +245,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `dob`, `role`, `picture`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Alven Gemini Julio', 'alven@gmail.com', '$2y$10$DQeAqRy8PT6Wdyw8x92jO.LqwIJpWmnW87WdQlA5ZBc0janWWMYPy', '1996-06-03', 'Member', 'Lee_Hyun.jpg', '0wryK3TfJrlz9FGOs4OoETilE2HCIlMCFeI8dXObQLS91CeYoUmeNjoYnkzW', '2017-11-11 11:15:38', '2017-12-05 15:48:59'),
-(2, 'Admin', 'admin@admin.com', '$2y$10$ht58MGHRTkChWzy1qlNyA.3O3Bf8NTU67WrlYRY48ehwwQFQ6/glS', '1998-12-04', 'Admin', 'Lee_Hyun.jpg', 'RaooEGZypvMoqkbGGiqCTIEPOye6pbBUFRa8Ni1GqsANVvaVqEiCVSCKDznk', '2017-12-03 14:29:09', '2017-12-05 13:20:41'),
+(1, 'Alven Gemini Julio', 'alven@gmail.com', '$2y$10$DQeAqRy8PT6Wdyw8x92jO.LqwIJpWmnW87WdQlA5ZBc0janWWMYPy', '1996-06-03', 'Member', 'Lee_Hyun.jpg', 'gt95iKLXZS7cMsTMl8D5vaXjSFKRNs5vEtvOMyACSVoGVjXTj8bsHY28Vuvd', '2017-11-11 11:15:38', '2017-12-06 15:51:40'),
+(2, 'Admin', 'admin@admin.com', '$2y$10$ht58MGHRTkChWzy1qlNyA.3O3Bf8NTU67WrlYRY48ehwwQFQ6/glS', '1998-12-04', 'Admin', 'Lee_Hyun.jpg', 'dyb0PszcYaE3WXCvsaI2e1Qf45qd1pIIrP8U6ldZeKWWI98h3nEAFdxZoqrq', '2017-12-03 14:29:09', '2017-12-06 16:06:07'),
 (3, 'asd', 'asd@gmail.com', '$2y$10$q6wX4uiF1Aaitn83C73s3ODfWamWTiwqPP.AgUQJf1Uv4EsMNm/Km', '2017-12-06', 'Member', 'Lee_Hyun.jpg', '2mgDvM2ARC9mTeXDEJicVvvruEvEhnZ89cHPLW2vqya4Kiz8B4ezDKNFt6cu', '2017-12-05 13:49:12', '2017-12-05 15:48:52');
 
 --
@@ -327,7 +323,7 @@ ALTER TABLE `carts`
 -- AUTO_INCREMENT for table `cart_details`
 --
 ALTER TABLE `cart_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `games_libraries`
@@ -345,25 +341,25 @@ ALTER TABLE `games_library_details`
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `transaction_histories`
 --
 ALTER TABLE `transaction_histories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
